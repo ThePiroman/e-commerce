@@ -7,16 +7,16 @@ import {
 } from '@commercetools/ts-client';
 
 
-export const projectKey = '{projectKey}';
-const scopes = ['{scope}'];
+export const projectKey = import.meta.env.CTP_PROJECT_KEY;
+const scopes = [import.meta.env.CTP_SCOPES];
 
 // Configure authMiddlewareOptions
 const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: 'https://auth.{region}.commercetools.com',
+  host: import.meta.env.CTP_AUTH_URL,
   projectKey,
   credentials: {
-    clientId: '{clientID}',
-    clientSecret: '{clientSecret}',
+    clientId: import.meta.env.CTP_CLIENT_ID,
+    clientSecret: import.meta.env.CTP_CLIENT_SECRET,
   },
   scopes,
   httpClient: fetch,
@@ -24,7 +24,7 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
 
 // Configure HTTP API httpMiddlewareOptions
 const httpAPIHTTPMiddlewareOptions: HttpMiddlewareOptions = {
-  host: 'https://api.{region}.commercetools.com',
+  host: import.meta.env.CTP_API_URL,
   httpClient: fetch,
 };
 

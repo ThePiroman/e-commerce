@@ -4,7 +4,7 @@ import {
   type Project,
 } from '@commercetools/platform-sdk';
 
-const httpApiRoot = createApiBuilderFromCtpClient(
+export const httpApiRoot = createApiBuilderFromCtpClient(
   ctpClientHTTPAPI
 ).withProjectKey({
   projectKey,
@@ -18,4 +18,4 @@ async function getProject(): Promise<Project> {
 }
 
 // Retrieve Project information and output the result to the log
-await getProject().then(console.log).catch(console.error);
+//await getProject().then(console.log).catch(console.error);
