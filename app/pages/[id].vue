@@ -5,10 +5,14 @@ const route = useRoute()
 
 const { data: product, error } = await useFetch(`/api/${route.params.id}`)
 
+useHead({
+  title: `Купить`,
+})
+
 </script>
 
 <template>
-    <p>CARD PAGE</p>
+    <h1>Товар</h1>
     <ProductCard :productId = product?.id :name = product?.name :price = product?.price.centAmount :image = product?.image></ProductCard>
     <LinkHolder>
         <NuxtLink class="testroute__link" to="testroute">To test route</NuxtLink>

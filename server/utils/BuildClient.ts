@@ -6,17 +6,19 @@ import {
   type HttpMiddlewareOptions, // Required for sending HTTP requests
 } from '@commercetools/ts-client';
 
+const config = useRuntimeConfig()
 
-export const projectKey = import.meta.env.CTP_PROJECT_KEY;
-const scopes = [import.meta.env.CTP_SCOPES];
+
+export const projectKey = config.projectKey;
+const scopes = [config.scopes];
 
 // Configure authMiddlewareOptions
 const authMiddlewareOptions: AuthMiddlewareOptions = {
-  host: import.meta.env.CTP_AUTH_URL,
+  host: config.authURL,
   projectKey,
   credentials: {
-    clientId: import.meta.env.CTP_CLIENT_ID,
-    clientSecret: import.meta.env.CTP_CLIENT_SECRET,
+    clientId: config.clientID,
+    clientSecret: config.clientSecret,
   },
   scopes,
   httpClient: fetch,
@@ -24,7 +26,7 @@ const authMiddlewareOptions: AuthMiddlewareOptions = {
 
 // Configure HTTP API httpMiddlewareOptions
 const httpAPIHTTPMiddlewareOptions: HttpMiddlewareOptions = {
-  host: import.meta.env.CTP_API_URL,
+  host: config.apiURL,
   httpClient: fetch,
 };
 

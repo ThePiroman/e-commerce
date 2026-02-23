@@ -13,6 +13,8 @@
     "@commercetools/platform-sdk": "^8.24.0",
     "@commercetools/sdk-auth": "^5.0.1",
     "@commercetools/ts-client": "^4.9.0",
+    "@nuxt/image": "^2.0.0",
+    "lucide-vue-next": "^0.575.0",
     "nuxt": "^4.3.1",
     "vue": "^3.5.28",
     "vue-router": "^4.6.4"
@@ -27,5 +29,5 @@
       "plugin:vue/vue3-essential",
       "eslint:recommended"
     ]
-    }
+  }
 }

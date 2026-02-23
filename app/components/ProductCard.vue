@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import { Heart } from 'lucide-vue-next';
+import { Star } from 'lucide-vue-next';
+import { MessageCircle } from 'lucide-vue-next';
+
 const props = defineProps<{
     productId: string,
-    name: String | undefined, // adding undefined fixes errors when using on pages
-    price: number | undefined,
-    image: string | undefined
+    name?: String,
+    price?: number,
+    image?: string
 }>()
 
 </script>
@@ -12,39 +16,31 @@ const props = defineProps<{
     <div class="card">
         <div class="card__favorite">
             <button class="card__button">
-                <img src = ~/assets/favorite.svg>
+                <Heart :size="28"></Heart>
             </button>
         </div>
-        <a class="card__image">
-            <img :src=image>
-        </a>
-        <h1 class="card__price">{{price}} $</h1>
+        <NuxtLink class="card__image" :to="{name: 'id', params: {id: productId}}">
+            <NuxtImg :width="256" :height="256" :src=image></NuxtImg>
+        </NuxtLink>
+        <h2 class="card__price">{{price}} $</h2>
         <p class="card__name">
             <NuxtLink class ="card__link" :to="{name: 'id', params: {id: productId}}">{{ name }}</NuxtLink>
         </p>
         <div class="card__footer">
-            <span class="card__rating"><img src = ~/assets/rating.svg>5.0</span>
-            <span class="card__reviews"><img src = ~/assets/review.svg>2525</span>
+            <span class="card__rating"><Star :size="16"></Star>5.0</span>
+            <span class="card__reviews"><MessageCircle :size="16"></MessageCircle>2525</span>
         </div>
     </div>
 </template>
 
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tiny5&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
 .card {
     position: relative;
     background-color: whitesmoke;
     width: 256px;
     height: auto;
-}
-
-.card__image img {
-    width: 256px;
-    height: 256px;
 }
 
 .card__price {
@@ -79,26 +75,11 @@ const props = defineProps<{
     cursor: pointer;
 }
 
-.card__button img {
-    width: 32px;
-    height: 32px;
-}
-
 .card__footer {
     display: inline-flex;
     gap: 32px;
     text-align: left;
     font-family: "Lato", sans-serif;
-}
-
-.card__rating img {
-    width: 16px;
-    height: 16px;
-}
-
-.card__reviews img {
-    width: 14px;
-    height: 14px;
 }
 
 
