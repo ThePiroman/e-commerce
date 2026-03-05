@@ -8,14 +8,32 @@ const props = defineProps<{
 }>()
 
 const currentImageIndex = ref(0);
+let autoInterval : number;
+if (props.autoScrollTime) {
+  onMounted(() => {restartInterval()})
+}
 
-function next() {
+function next(userTriggered : boolean = false) {
   currentImageIndex.value = (currentImageIndex.value + 1) % props.images.length;
+  if (userTriggered) {
+    restartInterval()
+  }
 }
 
-function prev() {
+function prev(userTriggered : boolean = false) {
   currentImageIndex.value = (currentImageIndex.value - 1 + props.images.length) % props.images.length;
+  if (userTriggered) {
+    restartInterval()
+  }
 }
+
+function restartInterval() {
+  clearInterval(autoInterval);
+  if (props.autoScrollTime) {
+    autoInterval = setInterval(next, props.autoScrollTime * 1000, false)
+  }
+}
+
 </script>
 
 <template>
@@ -23,8 +41,8 @@ function prev() {
         <div class = "carousel__images">
             <NuxtImg v-for="(img, index) in images" class="image" :class="{active: index === currentImageIndex}" :src=img></NuxtImg>
         </div>
-        <button class = "carousel__prev" v-on:click="prev"><ChevronLeft></ChevronLeft></button>
-        <button class = "carousel__next" v-on:click="next"><ChevronRight></ChevronRight></button>
+        <button class = "carousel__prev" v-on:click="prev(true)"><ChevronLeft></ChevronLeft></button>
+        <button class = "carousel__next" v-on:click="next(true)"><ChevronRight></ChevronRight></button>
     </div>
 </template>
 
@@ -71,4 +89,5 @@ function prev() {
 .carousel__next { 
     right: 0px; 
 }
+
 </style>

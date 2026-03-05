@@ -5,7 +5,7 @@ import type { Image } from '@commercetools/platform-sdk';
 
 const route = useRoute()
 
-const { data: product } = await useFetch(`/api/${route.params.id}`)
+const { data: product } = await useFetch<ProductDetail>(`/api/${route.params.id}`)
 
 useHead({
   title: `Купить`,
@@ -23,7 +23,7 @@ product.value?.images.forEach((element: Image) => {
 <template>
     <h2>Товар</h2>
     <div class = "product">
-        <Carousel :images=images :img-height=512 :img-width=512></Carousel>
+        <Carousel :images=images :img-height=512 :img-width=512 :auto-scroll-time=7></Carousel>
         <div class = "product__details">
             <h1 class = "product__name">{{ product?.name }}</h1>
             <span class="product__rating"><Star :size="16"></Star>5.0</span>
