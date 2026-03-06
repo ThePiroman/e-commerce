@@ -1,8 +1,13 @@
 <script setup lang="ts">
-const { data: products } = await useFetch('/api/products')
+const { data: products } = await useFetch('/api/products');
+
+
 useHead({
   title: 'Каталог товаров',
 })
+
+import Modal from "../components/Modal.vue";
+
 </script>
 
 <template>
@@ -14,6 +19,7 @@ useHead({
     <LinkHolder>
         <NuxtLink class="index__link" to="/">To index</NuxtLink>
     </LinkHolder>
+    <Footer></Footer>
 </template>
 
 <style>
