@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Copyright } from 'lucide-vue-next';
 
-const contactsModalOpen = useState("contactsModalOpen", () => false)
+const contactsModalOpen = useState("contactsModalOpen", () => false);
 </script>
 
 <template>
@@ -21,8 +21,8 @@ const contactsModalOpen = useState("contactsModalOpen", () => false)
         <div class = "footer__copyright">
             <span class = "footer__copyright-text">Copyright <Copyright :size=14></Copyright> 2026 Некоммерческая организация. Все права защищены. Все совпадения случайны.</span>
         </div>
-        <div class = "footer_contacts" v-on:click="contactsModalOpen = true">
-            <span class = "footer_contacts-text">Контакты</span>
+        <div class = "footer__contacts" v-on:click="contactsModalOpen = true">
+            <span class = "footer__contacts-text">Контакты</span>
         </div>
     </footer>
 </template>
@@ -39,11 +39,11 @@ const contactsModalOpen = useState("contactsModalOpen", () => false)
     padding-bottom: 5px;
 }
 
-.footer_contacts {
+.footer__contacts {
     cursor: pointer;
 }
 
-.footer_contacts:hover {
+.footer__contacts:hover {
     color:rgb(125, 125, 125);
 }
 

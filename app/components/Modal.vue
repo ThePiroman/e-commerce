@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { X } from 'lucide-vue-next';
-import { stop } from 'vue';
 
 const props = defineProps({
     modalKey: String
 })
 
-const modalOpen = useState(props.modalKey, () => false)
-
-console.log(modalOpen)
+const modalOpen = useState(props.modalKey, () => false);
 
 </script>
 
@@ -33,7 +30,6 @@ console.log(modalOpen)
     right: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.4);
-    transition: blur 1s;
     display: flex;
     justify-content: center;
     align-items: center;
