@@ -12,6 +12,7 @@ useHead({
 </script>
 
 <template>
+    <NuxtLayout></NuxtLayout>
     <h1>Товар</h1>
     <ProductCard :productId = product?.id :name = product?.name :price = product?.price.centAmount :image = product?.image></ProductCard>
     <LinkHolder>
