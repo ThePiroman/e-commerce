@@ -18,11 +18,13 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
         </div>
     </Modal>
     <footer class = "footer">
-        <div class = "footer__copyright">
-            <span class = "footer__copyright-text">Copyright <Copyright :size=14></Copyright> 2026 Некоммерческая организация. Все права защищены. Все совпадения случайны.</span>
-        </div>
-        <div class = "footer__contacts" v-on:click="contactsModalOpen = true">
-            <span class = "footer__contacts-text">Контакты</span>
+        <div class = "footer__container">
+            <div class = "footer__copyright">
+                <span class = "footer__copyright-text">Copyright <Copyright :size=14></Copyright> 2026 Некоммерческая организация. Все права защищены. Все совпадения случайны.</span>
+            </div>
+            <div class = "footer__contacts" v-on:click="contactsModalOpen = true">
+                <span class = "footer__contacts-text">Контакты</span>
+            </div>
         </div>
     </footer>
 </template>
@@ -32,8 +34,12 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
 
 .footer {
     background-color: gainsboro;
+}
+
+.footer__container {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 25%;
     padding-top: 5px;
     padding-bottom: 5px;

@@ -6,20 +6,16 @@ useHead({
   title: 'Каталог товаров',
 })
 
-import Modal from "../components/Modal.vue";
-
 </script>
 
 <template>
     <h1>Каталог товаров</h1>
     <div class="display">
-        <ProductCard v-for="product in products" :key="product.id" :productId = product.id :name = product.name :price = product.price?.centAmount :image = product.image>
-        </ProductCard>
+        <ProductCard v-for="product in products" :key="product.id" :productId = product.id :name = product.name :price = product.price?.centAmount :image = product.image></ProductCard>
     </div>
     <LinkHolder>
         <NuxtLink class="index__link" to="/">To index</NuxtLink>
     </LinkHolder>
-    <Footer></Footer>
 </template>
 
 <style>
