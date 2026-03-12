@@ -4,12 +4,69 @@ import { ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next'
 
 const headerSearchInput = ref<HTMLInputElement | null>(null);
 const headerSearchButton = ref<HTMLButtonElement | null>(null);
-
 function handleSearchInput() {
     if (headerSearchInput.value?.value) {
         headerSearchButton.value?.classList.add('header__clear-button--active');
     } else {
         headerSearchButton.value?.classList.remove('header__clear-button--active');
+    }
+}
+
+function handleSubmit(event : KeyboardEvent) : void {
+    if (event.key == "Enter") {
+
+        if (!headerSearchInput.value?.value) {
+            return;
+        }
+
+
+        const convertTable : {[key : string]: string} = {
+            'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
+            'е': 'e',    'ё': 'e',    'ж': 'zh',   'з': 'z',    'и': 'i',
+            'й': 'y',    'к': 'k',    'л': 'l',    'м': 'm',    'н': 'n',
+            'о': 'o',    'п': 'p',    'р': 'r',    'с': 's',    'т': 't',
+            'у': 'u',    'ф': 'f',    'х': 'h',    'ц': 'c',    'ч': 'ch',
+            'ш': 'sh',   'щ': 'sch',  'ь': '',     'ы': 'y',    'ъ': '',
+            'э': 'e',    'ю': 'yu',   'я': 'ya'
+        }
+
+        let convertedValue : string[] = [];
+
+        if (headerSearchInput.value.value) {
+
+            const searchValue = headerSearchInput.value.value.split(' ');
+
+            searchValue.forEach((word) => {
+                if (word) {
+
+                    let convertedWord = '';
+
+                    for (let symbolIdx = 0; symbolIdx < word.length; symbolIdx++) {
+                        
+                        let symbol = word[symbolIdx];
+
+                        if (symbol) {
+                            if (convertTable[symbol] === '') {
+                                continue;
+                            }
+
+                            if (convertTable[symbol]) {
+                                convertedWord += convertTable[symbol];
+                            } else {
+                                convertedWord += symbol;
+                            }
+                        }
+                    }
+
+                    convertedValue.push(convertedWord);
+                }
+            })
+        }
+
+        convertedValue = convertedValue.filter((word) => word !== '');
+
+        useRouter().push(`search/queryParam?${convertedValue.join('-')}`);
+        
     }
 }
 </script>
@@ -24,7 +81,7 @@ function handleSearchInput() {
                 <button class = "header__category-button"><TextAlignJustify color="white" :size=44></TextAlignJustify></button>
             </div>
             <div class = "header__search">
-                <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" ref="headerSearchInput" @input="handleSearchInput()">
+                <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" ref="headerSearchInput" @input="handleSearchInput()" @keydown="handleSubmit">
                 <button class = "header__search-button" ref="headerSearchButton" @click="() => {if (headerSearchInput) {headerSearchInput.value = ''; headerSearchButton?.classList.remove('header__clear-button--active'); headerSearchInput.focus()}}">
                     <X color="gray" :size=18></X>
                 </button>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 
-const route = useRoute()
+const route = useRoute();
 
-const { data: product, error } = await useFetch(`/api/${route.params.id}`)
+const { data: product } = await useFetch(`/api/${route.params.id}`);
 
 useHead({
   title: `Купить`,
@@ -12,7 +12,6 @@ useHead({
 </script>
 
 <template>
-    <NuxtLayout></NuxtLayout>
     <h1>Товар</h1>
     <ProductCard :productId = product?.id :name = product?.name :price = product?.price.centAmount :image = product?.image></ProductCard>
     <LinkHolder>

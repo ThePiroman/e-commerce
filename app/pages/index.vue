@@ -5,7 +5,6 @@ useHead({
 </script>
 
 <template>
-    <NuxtLayout></NuxtLayout>
     <h1>Начальная страница E-commerce</h1>
     <LinkHolder>
         <NuxtLink class="testroute__link" to="testroute">To test route</NuxtLink>
