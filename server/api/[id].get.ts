@@ -12,8 +12,12 @@ export default defineEventHandler(async (event) => {
     return {
       id: product.id,
       name: curr.name['en-US'],
+      description: curr.description?.['en-US'],
+      attributes: curr.attributes,
+      variantAttributes: masterVar.attributes,
+      variants: curr.variants,
       price: masterVar.prices?.[0]?.value,
-      image: masterVar.images?.[0]?.url
+      images: masterVar.images
     }
 
   }
