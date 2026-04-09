@@ -1,71 +1,20 @@
 
 <script setup lang="ts">
 import { ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next';
+import { translit } from '#imports';
 
-const headerSearchInput = ref<HTMLInputElement | null>(null);
-const headerSearchButton = ref<HTMLButtonElement | null>(null);
-function handleSearchInput() {
-    if (headerSearchInput.value?.value) {
-        headerSearchButton.value?.classList.add('header__clear-button--active');
-    } else {
-        headerSearchButton.value?.classList.remove('header__clear-button--active');
-    }
-}
+const headerSearchInput = shallowRef<HTMLInputElement | null>(null);
+const headerSearchButton = shallowRef<HTMLButtonElement | null>(null);
+const headerSearchValue = shallowRef('');
 
 function handleSubmit(event : KeyboardEvent) : void {
     if (event.key == "Enter") {
 
-        if (!headerSearchInput.value?.value) {
+        if (!headerSearchValue.value) {
             return;
         }
 
-
-        const convertTable : {[key : string]: string} = {
-            'а': 'a',    'б': 'b',    'в': 'v',    'г': 'g',    'д': 'd',
-            'е': 'e',    'ё': 'e',    'ж': 'zh',   'з': 'z',    'и': 'i',
-            'й': 'y',    'к': 'k',    'л': 'l',    'м': 'm',    'н': 'n',
-            'о': 'o',    'п': 'p',    'р': 'r',    'с': 's',    'т': 't',
-            'у': 'u',    'ф': 'f',    'х': 'h',    'ц': 'c',    'ч': 'ch',
-            'ш': 'sh',   'щ': 'sch',  'ь': '',     'ы': 'y',    'ъ': '',
-            'э': 'e',    'ю': 'yu',   'я': 'ya'
-        }
-
-        let convertedValue : string[] = [];
-
-        if (headerSearchInput.value.value) {
-
-            const searchValue = headerSearchInput.value.value.split(' ');
-
-            searchValue.forEach((word) => {
-                if (word) {
-
-                    let convertedWord = '';
-
-                    for (let symbolIdx = 0; symbolIdx < word.length; symbolIdx++) {
-                        
-                        let symbol = word[symbolIdx];
-
-                        if (symbol) {
-                            if (convertTable[symbol] === '') {
-                                continue;
-                            }
-
-                            if (convertTable[symbol]) {
-                                convertedWord += convertTable[symbol];
-                            } else {
-                                convertedWord += symbol;
-                            }
-                        }
-                    }
-
-                    convertedValue.push(convertedWord);
-                }
-            })
-        }
-
-        convertedValue = convertedValue.filter((word) => word !== '');
-
-        useRouter().push(`search/queryParam?${convertedValue.join('-')}`);
+        useRouter().push(`search/queryParam?${translit(headerSearchValue.value)}`);
         
     }
 }
@@ -81,8 +30,8 @@ function handleSubmit(event : KeyboardEvent) : void {
                 <button class = "header__category-button"><TextAlignJustify color="white" :size=44></TextAlignJustify></button>
             </div>
             <div class = "header__search">
-                <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" ref="headerSearchInput" @input="handleSearchInput()" @keydown="handleSubmit">
-                <button class = "header__search-button" ref="headerSearchButton" @click="() => {if (headerSearchInput) {headerSearchInput.value = ''; headerSearchButton?.classList.remove('header__clear-button--active'); headerSearchInput.focus()}}">
+                <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" ref="headerSearchInput" v-model="headerSearchValue" @keydown="handleSubmit">
+                <button class = "header__search-button" :class="{ 'header__clear-button--active': headerSearchValue && headerSearchValue.length > 0 }" ref="headerSearchButton" @click="() => {if (headerSearchValue && headerSearchInput) {headerSearchValue = ''; headerSearchButton?.classList.remove('header__clear-button--active'); headerSearchInput.focus()}}">
                     <X color="gray" :size=18></X>
                 </button>
             </div>

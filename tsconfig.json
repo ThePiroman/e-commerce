@@ -16,7 +16,9 @@
     }
   ],
   "compilerOptions": {
-    "types": ["@nuxt/types", "vite/client"],
-    "include": ["env.d.ts"]
-  }
+    "types": ["@nuxt/types", "vite/client"]
+  },
+  "include": [
+    "env.d.ts"
+  ]
 }
