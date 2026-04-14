@@ -1,38 +1,45 @@
 
 <script setup lang="ts">
-import { ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next';
+import { Search, ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next';
 import { translit } from '#imports';
 
-const headerSearchInput = shallowRef<HTMLInputElement | null>(null);
 const headerSearchButton = shallowRef<HTMLButtonElement | null>(null);
 const headerSearchValue = shallowRef('');
 
-function handleSubmit(event : KeyboardEvent) : void {
-    if (event.key == "Enter") {
-
-        if (!headerSearchValue.value) {
-            return;
-        }
-
-        useRouter().push(`search/queryParam?${translit(headerSearchValue.value)}`);
-        
+function handleSubmit() : void {
+    if (!headerSearchValue.value) {
+        return;
     }
+
+    useRouter().push(`search/queryParam?${translit(headerSearchValue.value)}`);
+        
 }
+
+function handleClear() : void {
+    if (headerSearchValue) {
+        headerSearchValue.value = ''; 
+    }
+    
+    headerSearchButton.value?.classList.remove('header__search-clear-button--active');
+
+}
+
 </script>
 
 <template>
     <header class = "header">
         <div class = "header__container">
-            <div class = "header__logo">
-                <NuxtLink to="/" class="header__logo-text">E-Commerce</NuxtLink>
-            </div>
+            <NuxtLink to="/" class="header__logo">E-Commerce</NuxtLink>
             <div class = "header__category">
                 <button class = "header__category-button"><TextAlignJustify color="white" :size=44></TextAlignJustify></button>
             </div>
             <div class = "header__search">
-                <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" ref="headerSearchInput" v-model="headerSearchValue" @keydown="handleSubmit">
-                <button class = "header__search-button" :class="{ 'header__clear-button--active': headerSearchValue && headerSearchValue.length > 0 }" ref="headerSearchButton" @click="() => {if (headerSearchValue && headerSearchInput) {headerSearchValue = ''; headerSearchButton?.classList.remove('header__clear-button--active'); headerSearchInput.focus()}}">
+                <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" v-model="headerSearchValue" @keydown.enter="handleSubmit">
+                <button class = "header__search-clear-button" :class="{ 'header__search-clear-button--active': headerSearchValue && headerSearchValue.length > 0 }" ref="headerSearchButton" @click="handleClear">
                     <X color="gray" :size=18></X>
+                </button>
+                <button class = "header__search-search-button" @click="handleSubmit">
+                    <Search color="gray" :size=18></Search>
                 </button>
             </div>
             <div class = "header__basket">
@@ -62,9 +69,6 @@ function handleSubmit(event : KeyboardEvent) : void {
 
 .header__logo {
     margin-bottom: 10px;
-}
-
-.header__logo-text {
     text-decoration: none;
     font-family: "Oswald", sans-serif;
     font-size: 32px;
@@ -90,16 +94,25 @@ function handleSubmit(event : KeyboardEvent) : void {
     outline: none;
 }
 
-.header__search-button {
+.header__search-clear-button {
     position: absolute;
     right: 0;
+    margin-right: 25px;
     cursor: pointer;
     background-color: transparent;
     border: none;
     display: none;
 }
 
-.header__clear-button--active {
+.header__search-search-button {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+}
+
+.header__search-clear-button--active {
     display: block;
 }
 

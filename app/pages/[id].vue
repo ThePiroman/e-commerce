@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { Star } from 'lucide-vue-next';
+import { fetchSingleProduct } from '~~/server/api/productFetching';
 
 const route = useRoute();
 
-const { data: product, error, pending } = await useFetch<ProductDetail>(`http://localhost:3001/products/${route.params.id}`)
-
-
-console.log(product)
+const fetchResult = await fetchSingleProduct(route.params.id);
+const product = fetchResult.product;
 
 useHead({
-  title: `Купить`,
+  title: product.value?.name ?? 'Продукт'
 })
 
 </script>

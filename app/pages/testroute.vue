@@ -1,5 +1,9 @@
 <script setup lang="ts">
-const { data: products, error, pending } = await useFetch<ProductCard>('http://localhost:3001/products')
+import { fetchProducts } from '~~/server/api/productFetching';
+
+const fetchResult = await fetchProducts();
+const products = fetchResult.products;
+
 useHead({
   title: 'Каталог товаров',
 })

@@ -2,16 +2,20 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/image'],
+  modules: ['@nuxt/image', '@nuxtjs/apollo'],
   css: [
     '~/main.css'
   ],
   runtimeConfig: {
-    projectKey: import.meta.env.CTP_PROJECT_KEY,
-    clientSecret: import.meta.env.CTP_CLIENT_SECRET,
-    clientID: import.meta.env.CTP_CLIENT_ID,
-    authURL: import.meta.env.CTP_AUTH_URL,
-    apiURL: import.meta.env.CTP_API_URL,
-    scopes: import.meta.env.CTP_SCOPES
+    public: {
+      fetchAddress: import.meta.env.NUXT_FETCH_ADDRESS
+    }
+  },
+  apollo: {
+    clients: {
+      default: {
+        httpEndpoint: 'https://your-api.com/graphql'
+      }
+    }
   }
 })
