@@ -8,13 +8,10 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
     <Modal modal-key="contactsModalOpen">
         <span class = "modal__title">Разработчики</span>
         <div class = "modal__contact">
-            <div class = "modal__contact-name"><a class = "modal__contact-link" href="https://github.com/NikitaStarmoussov">NikitaStarmoussov</a></div>
-        </div>
-        <div class = "modal__contact">
-            <div class = "modal__contact-name"><a class = "modal__contact-link" href="https://github.com/StarmousovMihail">StarmousovMihail</a></div>
-        </div>
-        <div class = "modal__contact">
-            <div class = "modal__contact-name"><a class = "modal__contact-link" href="https://github.com/ThePiroman">ThePiroman</a></div>
+            <div class = "modal__contact-name">ThePiroman (thepiroman1337@gmail.com)
+                <a class = "modal__contact-link" href="https://github.com/ThePiroman">Github</a>
+                <a class = "modal__contact-link" href="https://t.me/ThePiromanl">Telegram</a>
+            </div>
         </div>
     </Modal>
     <footer class = "footer">
@@ -33,7 +30,7 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
 <style>
 
 .footer {
-    background-color: gainsboro;
+    background-color: var(--footer-main-color);
 }
 
 .footer__container {
@@ -50,7 +47,7 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
 }
 
 .footer__contacts:hover {
-    color:rgb(125, 125, 125);
+    color: var(--footer-button-hover-color);
 }
 
 .modal__title {
@@ -64,6 +61,8 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
 
 .modal__contact-name {
     font-family: "Lato", sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal__contact-link {
@@ -72,7 +71,7 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
 }
 
 .modal__contact-link:hover {
-    color:rgb(60, 60, 60);
+    color: var(--modal-button-hover-color);
 }
 
 </style>

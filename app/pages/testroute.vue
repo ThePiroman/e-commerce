@@ -19,10 +19,6 @@ useHead({
 </template>
 
 <style>
-body {
-    background-color: darkslategrey;
-}
-
 .index__link {
     text-decoration: none;
     color:inherit;

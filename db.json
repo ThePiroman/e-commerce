@@ -1,0 +1,36 @@
+{
+    "products": [
+        {
+            "id": "gpu",
+            "name": "GTX 1060",
+            "price": 228,
+            "image": [
+                "gpu_1.png",
+                "gpu_2.png"
+            ],
+            "desc": "gpu very cool",
+            "attributes": [ 
+                {
+                    "name": "att1",
+                    "value": "att1 desc"
+                }
+            ]
+        },
+
+        {
+            "id": "cpu",
+            "name": "CPU I9",
+            "price": 1337,
+            "image": [
+                "cpu.jpg"
+            ],
+            "desc":"CPU very cool very",
+            "attributes": [ 
+                {
+                    "name": "att1",
+                    "value": "att1 desc"
+                }
+            ]
+        }
+    ]
+}

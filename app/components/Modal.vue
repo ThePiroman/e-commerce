@@ -5,16 +5,20 @@ const props = defineProps({
     modalKey: String
 })
 
-const modalOpen = useState(props.modalKey, () => false);
+let modalOpen = useState(props.modalKey, () => false);
+
+function handleClick() {
+    modalOpen.value = false;
+}
 
 </script>
 
 <template>
-    <div class = "modal" v-if="modalOpen" v-on:click="modalOpen = false">
+    <div class = "modal" v-if="modalOpen" v-on:click="handleClick">
         <div class = "modal__window" @click.stop>
             <slot></slot>
         </div>
-        <div class = "modal__close-button" v-on:click="modalOpen = false">
+        <div class = "modal__close-button" v-on:click="handleClick">
             <X color="white"></X>
         </div>
     </div>
@@ -39,7 +43,7 @@ const modalOpen = useState(props.modalKey, () => false);
 }
 
 .modal__window {
-    background-color: grey;
+    background-color: var(--modal-main-color);
     border-radius: 5%;
     text-align: center;
     width: 500px;
@@ -48,7 +52,7 @@ const modalOpen = useState(props.modalKey, () => false);
 }
 
 .modal__close-button {
-    background-color: grey;
+    background-color: var(--modal-main-color);
     border-radius: 75%;
     width: 32px;
     height: 32px;
@@ -61,7 +65,7 @@ const modalOpen = useState(props.modalKey, () => false);
 }
 
 .modal__close-button:hover {
-    background-color: lightgrey;
+    background-color: var(--modal-close-button-hover-color);
 }
 
 
