@@ -19,7 +19,4 @@ useHead({
     background-color: aliceblue;
 }
 
-body {
-    background-color: darkslategrey;
-}
 </style>
