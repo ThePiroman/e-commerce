@@ -7,6 +7,7 @@ const products = fetchResult.products;
 useHead({
   title: 'Каталог товаров',
 })
+
 </script>
 
 <template>
@@ -21,10 +22,6 @@ useHead({
 </template>
 
 <style>
-body {
-    background-color: darkslategrey;
-}
-
 .index__link {
     text-decoration: none;
     color:inherit;

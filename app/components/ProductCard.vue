@@ -38,7 +38,7 @@ const props = defineProps<{
 
 .card {
     position: relative;
-    background-color: whitesmoke;
+    background-color: var(--product-card-color);
     width: 256px;
     height: auto;
 }
