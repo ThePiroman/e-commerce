@@ -3,7 +3,7 @@
 import { Search, ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next';
 import { translit } from '#imports';
 
-const headerSearchButton = shallowRef<HTMLButtonElement | null>(null);
+
 const headerSearchValue = shallowRef('');
 
 function handleSubmit() : void {
@@ -16,12 +16,7 @@ function handleSubmit() : void {
 }
 
 function handleClear() : void {
-    if (headerSearchValue) {
-        headerSearchValue.value = ''; 
-    }
-    
-    headerSearchButton.value?.classList.remove('header__search-clear-button--active');
-
+    headerSearchValue.value = ""
 }
 
 </script>
@@ -35,7 +30,7 @@ function handleClear() : void {
             </div>
             <div class = "header__search">
                 <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" v-model="headerSearchValue" @keydown.enter="handleSubmit">
-                <button class = "header__search-clear-button" :class="{ 'header__search-clear-button--active': headerSearchValue && headerSearchValue.length > 0 }" ref="headerSearchButton" @click="handleClear">
+                <button class = "header__search-clear-button" :class="{ 'header__search-clear-button--hidden': headerSearchValue.length <= 0 }" @click="handleClear">
                     <X color="gray" :size=18></X>
                 </button>
                 <button class = "header__search-search-button" @click="handleSubmit">
@@ -70,9 +65,9 @@ function handleClear() : void {
 .header__logo {
     margin-bottom: 10px;
     text-decoration: none;
-    font-family: "Oswald", sans-serif;
+    font-family: var(--header-main-font);
     font-size: 32px;
-    color: white;
+    color: var(--header-logo-color);
 }
 
 .header__category-button {
@@ -90,8 +85,6 @@ function handleClear() : void {
 .header__search-input {
     width: 512px;
     height: 25px;
-    border: none;
-    outline: none;
 }
 
 .header__search-clear-button {
@@ -101,6 +94,10 @@ function handleClear() : void {
     cursor: pointer;
     background-color: transparent;
     border: none;
+    display: block;
+}
+
+.header__search-clear-button--hidden {
     display: none;
 }
 
@@ -112,10 +109,6 @@ function handleClear() : void {
     border: none;
 }
 
-.header__search-clear-button--active {
-    display: block;
-}
-
 .header__basket, .header__profile {
     display: flex;
     flex-direction: column;
@@ -125,9 +118,9 @@ function handleClear() : void {
 }
 
 .header__basket-label, .header__profile-label {
-    font-family: "Oswald", sans-serif;
+    font-family: var(--header-main-font);
     font-size: 14px;
-    color: whitesmoke;
+    color: var(--header-label-color);
 }
 
 </style>

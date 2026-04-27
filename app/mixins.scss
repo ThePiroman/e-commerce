@@ -1,0 +1,11 @@
+@mixin product-card-title {
+    font-family: var(--product-title-font);
+    font-size: xx-large;
+    font-weight: 300;
+}
+
+@mixin product-card-price {
+    font-family: var(--product-price-font);
+    font-size: x-large;
+    font-weight: 500;
+}

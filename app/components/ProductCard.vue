@@ -34,7 +34,7 @@ const props = defineProps<{
 </template>
 
 
-<style>
+<style lang="scss">
 
 .card {
     position: relative;
@@ -44,16 +44,13 @@ const props = defineProps<{
 }
 
 .card__price {
-    font-family: "Oswald", sans-serif;
-    font-weight: 500;
+    @include product-card-price;
     margin-top: 0;
     margin-bottom: 0;
 }
 
 .card__name {
-    font-size: xx-large;
-    font-family: "SN Pro", sans-serif;
-    font-weight: 300;
+    @include product-card-title;
     margin-top: 0;
     margin-bottom: 20px;
 }
@@ -79,7 +76,7 @@ const props = defineProps<{
     display: inline-flex;
     gap: 32px;
     text-align: left;
-    font-family: "Lato", sans-serif;
+    font-family: var(--product-footer-font);
 }
 
 

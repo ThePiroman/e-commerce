@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/image', '@nuxtjs/apollo'],
   css: [
-    '~/main.css'
+    '~/main.css',
   ],
   runtimeConfig: {
     public: {
@@ -15,6 +15,15 @@ export default defineNuxtConfig({
     clients: {
       default: {
         httpEndpoint: 'https://your-api.com/graphql'
+      }
+    }
+  },
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "~/mixins.scss";`
+        }
       }
     }
   }

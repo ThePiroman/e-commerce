@@ -9,7 +9,7 @@ const fetchResult = await fetchSingleProduct(route.params.id);
 const product = fetchResult.product;
 
 useHead({
-  title: product.value?.name ?? 'Продукт'
+  title: `${product.value?.name ?? ''} купить быстро недорого`
 })
 
 </script>
@@ -17,7 +17,7 @@ useHead({
 <template>
     <h2>Товар</h2>
     <div class = "product">
-        <Carousel :images=product.image :img-height=512 :img-width=512 :auto-scroll-time=7></Carousel>
+        <Carousel :images=product.images :img-height=512 :img-width=512 :auto-scroll-time=7></Carousel>
         <div class = "product__details">
             <h1 class = "product__name">{{ product?.name }}</h1>
             <span class="product__rating"><Star :size="16"></Star>5.0</span>
@@ -47,7 +47,7 @@ useHead({
     </LinkHolder>
 </template>
 
-<style>
+<style lang="scss">
 .product {
     background-color: rgb(255, 241, 214);
     display: flex;
@@ -60,14 +60,12 @@ useHead({
 }
 
 .product__name {
-    font-size: xx-large;
-    font-family: "SN Pro", sans-serif;
-    font-weight: 300;
+    @include product-card-title;
 }
 
 .product__rating {
     text-align: left;
-    font-family: "Lato", sans-serif;
+    font-family: var(--product-footer-font);
 }
 
 .product__order {
@@ -99,8 +97,7 @@ useHead({
 }
 
 .product__price {
-    font-family: "Oswald", sans-serif;
-    font-weight: 500;
+    @include product-card-price;
 }
 
 .product__specifics-container {

@@ -12,7 +12,7 @@ useHead({
 <template>
     <h1>Каталог товаров</h1>
     <div class="display">
-        <ProductCard v-for="product in products" :key="product.id" :productId = product.id :name = product.name :price = product.price :image = product.image[0]>
+        <ProductCard v-for="product in products" :key="product.id" :productId = product.id :name = product.name :price = product.price :image = product.images[0]>
         </ProductCard>
     </div>
     <LinkHolder>

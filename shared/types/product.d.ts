@@ -9,7 +9,7 @@ interface ProductDetail {
     id: string;
     name: string;
     price: number;
-    image: string[];
+    images: string[];
     desc: string;
     attributes: ProductAttribute[];
 }
