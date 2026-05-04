@@ -1,7 +1,6 @@
 
 <script setup lang="ts">
 import { Search, ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next';
-import { translit } from '#imports';
 
 
 const headerSearchValue = shallowRef('');
@@ -16,7 +15,7 @@ function handleSubmit() : void {
 }
 
 function handleClear() : void {
-    headerSearchValue.value = ""
+    headerSearchValue.value = "";
 }
 
 </script>

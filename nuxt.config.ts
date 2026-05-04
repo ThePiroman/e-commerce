@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import {resolve} from 'path';
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -9,13 +10,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       fetchAddress: import.meta.env.NUXT_FETCH_ADDRESS
-    }
-  },
-  apollo: {
-    clients: {
-      default: {
-        httpEndpoint: 'https://your-api.com/graphql'
-      }
     }
   },
   vite: {

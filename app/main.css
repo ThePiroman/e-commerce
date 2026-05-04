@@ -16,3 +16,7 @@
     --product-title-font: "SN Pro", sans-serif;
     --product-footer-font: "Lato", sans-serif;
 }
+
+body {
+    background-color: var(--body-color);
+}

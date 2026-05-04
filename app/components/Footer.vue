@@ -31,6 +31,11 @@ const contactsModalOpen = useState("contactsModalOpen", () => false);
 
 .footer {
     background-color: var(--footer-main-color);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
 }
 
 .footer__container {

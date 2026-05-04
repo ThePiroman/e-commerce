@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { Star } from 'lucide-vue-next';
-import { fetchSingleProduct } from '~~/server/api/productFetching';
 
 const route = useRoute();
 

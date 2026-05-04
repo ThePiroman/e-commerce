@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { fetchProducts } from '~~/server/api/productFetching';
+
+
 
 const fetchResult = await fetchProducts();
 const products = fetchResult.products;
