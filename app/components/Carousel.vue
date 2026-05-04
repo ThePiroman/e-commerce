@@ -7,7 +7,7 @@ const props = defineProps<{
     autoScrollTime?: number
 }>()
 
-const currentImageIndex = ref(0);
+const currentImageIndex = shallowRef(0);
 let autoInterval : number;
 if (props.autoScrollTime) {
   onMounted(() => {restartInterval()})

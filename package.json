@@ -15,9 +15,12 @@
     "@commercetools/ts-client": "^4.9.0",
     "@nuxt/fonts": "^0.14.0",
     "@nuxt/image": "^2.0.0",
+    "@nuxtjs/apollo": "^4.0.1-rc.5",
     "json-server": "^1.0.0-beta.15",
     "lucide-vue-next": "^0.575.0",
+    "npm": "^11.12.1",
     "nuxt": "^4.3.1",
+    "sass": "^1.99.0",
     "vue": "^3.5.28",
     "vue-router": "^4.6.4"
   },

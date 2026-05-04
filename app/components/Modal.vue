@@ -15,7 +15,8 @@ function handleClick() {
 
 <template>
     <div class = "modal" v-if="modalOpen" v-on:click="handleClick">
-        <div class = "modal__window" @click.stop>
+        <div class = "modal__backdrop"></div>
+        <div class = "modal__dialog" @click.stop>
             <slot></slot>
         </div>
         <div class = "modal__close-button" v-on:click="handleClick">
@@ -28,27 +29,32 @@ function handleClick() {
 <style>
 
 .modal {
+    display: flex;
     position: fixed;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
 }
 
-.modal__window {
+.modal__backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.modal__dialog {
     background-color: var(--modal-main-color);
     border-radius: 5%;
     text-align: center;
     width: 500px;
     height: 500px;
     padding-top: 50px;
+    z-index: 2;
 }
 
 .modal__close-button {
@@ -62,6 +68,7 @@ function handleClick() {
     cursor: pointer;
     margin-left: 15px;
     margin-bottom: 450px;
+    z-index: 2;
 }
 
 .modal__close-button:hover {

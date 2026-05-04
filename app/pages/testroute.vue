@@ -1,5 +1,10 @@
 <script setup lang="ts">
-const { data: products } = await useFetch<ProductCard>('/api/products')
+
+
+
+const fetchResult = await fetchProducts();
+const products = fetchResult.products;
+
 useHead({
   title: 'Каталог товаров',
 })
@@ -9,7 +14,8 @@ useHead({
 <template>
     <h1>Каталог товаров</h1>
     <div class="display">
-        <ProductCard v-for="product in products" :key="product.id" :productId = product.id :name = product.name :price = product.price?.centAmount :image = product.image></ProductCard>
+        <ProductCard v-for="product in products" :key="product.id" :productId = product.id :name = product.name :price = product.price :image = product.images[0]>
+        </ProductCard>
     </div>
     <LinkHolder>
         <NuxtLink class="index__link" to="/">To index</NuxtLink>

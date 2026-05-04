@@ -1,29 +1,22 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { Star } from 'lucide-vue-next';
-import type { Image } from '@commercetools/platform-sdk';
 
-const route = useRoute()
+const route = useRoute();
 
-const { data: product } = await useFetch<ProductDetail>(`/api/${route.params.id}`)
+const fetchResult = await fetchSingleProduct(route.params.id);
+const product = fetchResult.product;
 
 useHead({
-  title: `Купить`,
+  title: `${product.value?.name ?? ''} купить быстро недорого`
 })
-
-let images = <string[]>[];
-
-product.value?.images.forEach((element: Image) => {
-    images.push(element.url)
-})
-
 
 </script>
 
 <template>
     <h2>Товар</h2>
     <div class = "product">
-        <Carousel :images=images :img-height=512 :img-width=512 :auto-scroll-time=7></Carousel>
+        <Carousel :images=product.images :img-height=512 :img-width=512 :auto-scroll-time=7></Carousel>
         <div class = "product__details">
             <h1 class = "product__name">{{ product?.name }}</h1>
             <span class="product__rating"><Star :size="16"></Star>5.0</span>
@@ -34,19 +27,15 @@ product.value?.images.forEach((element: Image) => {
                         <span class = "product__spec-name">{{att.name}}</span>
                         <span class = "product__spec-details">{{att.value}}</span>
                     </div>
-                    <div v-for="att in product?.variantAttributes" class = "product__spec product__spec--border">
-                        <span class = "product__spec-name">{{att.name}}</span>
-                        <span class = "product__spec-details">{{att.value}}</span>
-                    </div>
                 </div>
             </div>
             <div class = "product__description">
                 <h2 class = "product__description-title">Описание</h2>
-                <p class = "product__description-paragraph">{{ product?.description }}</p>
+                <p class = "product__description-paragraph">{{ product?.desc }}</p>
             </div>
         </div>
         <div class = "product__order">
-            <h2 class = "product__price">{{ product?.price?.centAmount }}$</h2>
+            <h2 class = "product__price">{{ product?.price }}$</h2>
             <div class = "product__order-actions">
                 <button class = "product__order-button">Заказать</button>
             </div>
@@ -57,7 +46,7 @@ product.value?.images.forEach((element: Image) => {
     </LinkHolder>
 </template>
 
-<style>
+<style lang="scss">
 .product {
     background-color: rgb(255, 241, 214);
     display: flex;
@@ -70,14 +59,12 @@ product.value?.images.forEach((element: Image) => {
 }
 
 .product__name {
-    font-size: xx-large;
-    font-family: "SN Pro", sans-serif;
-    font-weight: 300;
+    @include product-card-title;
 }
 
 .product__rating {
     text-align: left;
-    font-family: "Lato", sans-serif;
+    font-family: var(--product-footer-font);
 }
 
 .product__order {
@@ -109,8 +96,7 @@ product.value?.images.forEach((element: Image) => {
 }
 
 .product__price {
-    font-family: "Oswald", sans-serif;
-    font-weight: 500;
+    @include product-card-price;
 }
 
 .product__specifics-container {

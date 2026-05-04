@@ -1,6 +1,5 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Tiny5&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=SN+Pro:ital,wght@0,200..900;1,200..900&display=swap'); */
+@import url(reset.css);
+@import url(normalize.css);
 
 :root {
     --body-color: darkslategrey;
@@ -10,9 +9,14 @@
     --modal-close-button-hover-color: lightgrey;
     --modal-button-hover-color: rgb(60, 60, 60);
     --product-card-color: whitesmoke;
+    --header-logo-color: white;
+    --header-label-color: whitesmoke;
+    --header-main-font: "Oswald", sans-serif;
+    --product-price-font: "Oswald", sans-serif;
+    --product-title-font: "SN Pro", sans-serif;
+    --product-footer-font: "Lato", sans-serif;
 }
 
 body {
-    background: var(--body-color);
-    margin: 0;
+    background-color: var(--body-color);
 }

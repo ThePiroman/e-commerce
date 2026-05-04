@@ -1,17 +1,20 @@
 interface ProductCard {
     id: string;
     name: string;
-    price: TypedMoney;
+    price: number;
     image: string;
 }
 
 interface ProductDetail {
-    id: string,
-    name: string,
-    description: string,
-    attributes: Attribute[],
-    variantAttributes: Attribute[],
-    variants: ProductVariant,
-    price: TypedMoney,
-    images: Image[]
+    id: string;
+    name: string;
+    price: number;
+    images: string[];
+    desc: string;
+    attributes: ProductAttribute[];
+}
+
+interface ProductAttribute {
+    name: string;
+    value: string;
 }

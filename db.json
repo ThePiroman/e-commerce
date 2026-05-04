@@ -4,7 +4,7 @@
             "id": "gpu",
             "name": "GTX 1060",
             "price": 228,
-            "image": [
+            "images": [
                 "gpu_1.png",
                 "gpu_2.png"
             ],
@@ -21,7 +21,7 @@
             "id": "cpu",
             "name": "CPU I9",
             "price": 1337,
-            "image": [
+            "images": [
                 "cpu.jpg"
             ],
             "desc":"CPU very cool very",
