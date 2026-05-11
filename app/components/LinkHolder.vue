@@ -4,7 +4,7 @@
 </script>
 
 <template>
-    <div class = "linkholder">
+    <div class = "linkholder text-black">
         <slot></slot>
     </div>
 </template>

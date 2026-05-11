@@ -1,7 +1,5 @@
 <script setup lang="ts">
 
-
-
 const fetchResult = await fetchProducts();
 const products = fetchResult.products;
 

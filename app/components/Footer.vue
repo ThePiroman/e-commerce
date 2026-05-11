@@ -1,27 +1,36 @@
 <script setup lang="ts">
 import { Copyright } from 'lucide-vue-next';
 
-const contactsModalOpen = useState("contactsModalOpen", () => false);
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+
 </script>
 
 <template>
-    <Modal modal-key="contactsModalOpen">
-        <span class = "modal__title">Разработчики</span>
-        <div class = "modal__contact">
-            <div class = "modal__contact-name">ThePiroman (thepiroman1337@gmail.com)
-                <a class = "modal__contact-link" href="https://github.com/ThePiroman">Github</a>
-                <a class = "modal__contact-link" href="https://t.me/ThePiromanl">Telegram</a>
-            </div>
-        </div>
-    </Modal>
-    <footer class = "footer">
+    <footer class = "footer text-black">
         <div class = "footer__container">
             <div class = "footer__copyright">
-                <span class = "footer__copyright-text">Copyright <Copyright :size=14></Copyright> 2026 Некоммерческая организация. Все права защищены. Все совпадения случайны.</span>
+                <span class = "footer__copyright-text">Copyright <Copyright сдфыы :size=14></Copyright> 2026 Некоммерческая организация. Все права защищены. Все совпадения случайны.</span>
             </div>
-            <div class = "footer__contacts" v-on:click="contactsModalOpen = true">
-                <span class = "footer__contacts-text">Контакты</span>
-            </div>
+            <Dialog>
+                <DialogTrigger>Контакты</DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                    <DialogTitle>ThePiroman</DialogTitle>
+                    <DialogDescription>
+                        <a class = "modal__contact-link" href="https://github.com/ThePiroman">Github</a>
+                        <a class = "modal__contact-link" href="https://t.me/ThePiromanl">Telegram</a>
+                    </DialogDescription>
+                    </DialogHeader>
+                </DialogContent>
+            </Dialog>
         </div>
     </footer>
 </template>

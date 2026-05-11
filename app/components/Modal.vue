@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import { X } from 'lucide-vue-next';
-
-const props = defineProps({
-    modalKey: String
-})
-
-let modalOpen = useState(props.modalKey, () => false);
-
-function handleClick() {
-    modalOpen.value = false;
-}
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 </script>
 
 <template>
-    <div class = "modal" v-if="modalOpen" v-on:click="handleClick">
-        <div class = "modal__backdrop"></div>
-        <div class = "modal__dialog" @click.stop>
-            <slot></slot>
-        </div>
-        <div class = "modal__close-button" v-on:click="handleClick">
-            <X color="white"></X>
-        </div>
-    </div>
+    <Dialog>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>
+            <DialogHeader>
+            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogDescription>
+                This action cannot be undone. This will permanently delete your account
+                and remove your data from our servers.
+            </DialogDescription>
+            </DialogHeader>
+        </DialogContent>
+    </Dialog>
 </template>
 
 

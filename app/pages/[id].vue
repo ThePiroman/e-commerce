@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { Star } from 'lucide-vue-next';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const route = useRoute();
 
@@ -15,8 +22,16 @@ useHead({
 
 <template>
     <h2>Товар</h2>
-    <div class = "product">
-        <Carousel :images=product.images :img-height=512 :img-width=512 :auto-scroll-time=7></Carousel>
+    <div class = "product text-black">
+        <Carousel class="w-200">
+            <CarouselContent>
+                <CarouselItem v-for="(img, index) in product?.images">
+                    <NuxtImg class = "size-128" :src=img></NuxtImg>
+                </CarouselItem>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+        </Carousel>
         <div class = "product__details">
             <h1 class = "product__name">{{ product?.name }}</h1>
             <span class="product__rating"><Star :size="16"></Star>5.0</span>

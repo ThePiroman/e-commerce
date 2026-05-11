@@ -2,6 +2,10 @@
 <script setup lang="ts">
 import { Search, ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next';
 
+import { Button } from "@/components/ui/button"
+import { Field } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+
 
 const headerSearchValue = shallowRef('');
 
@@ -27,15 +31,19 @@ function handleClear() : void {
             <div class = "header__category">
                 <button class = "header__category-button"><TextAlignJustify color="white" :size=44></TextAlignJustify></button>
             </div>
-            <div class = "header__search">
-                <input class = "header__search-input" type="text" autocomplete="off" placeholder="Поиск" v-model="headerSearchValue" @keydown.enter="handleSubmit">
+            <Field orientation="horizontal">
+                <Input v-model="headerSearchValue" @keydown.enter="handleSubmit" type="search" placeholder="Search..." />
+                <Button  @click="handleSubmit">Search</Button>
+            </Field>
+            <!-- <div class = "header__search">
+                <input class = "header__search-input text-black" type="text" autocomplete="off" placeholder="Поиск" v-model="headerSearchValue" @keydown.enter="handleSubmit">
                 <button class = "header__search-clear-button" :class="{ 'header__search-clear-button--hidden': headerSearchValue.length <= 0 }" @click="handleClear">
                     <X color="gray" :size=18></X>
                 </button>
                 <button class = "header__search-search-button" @click="handleSubmit">
                     <Search color="gray" :size=18></Search>
                 </button>
-            </div>
+            </div> -->
             <div class = "header__basket">
                 <ShoppingBasket color="white" :size=32></ShoppingBasket>
                 <span class = "header__basket-label">Корзина</span>
@@ -84,6 +92,7 @@ function handleClear() : void {
 .header__search-input {
     width: 512px;
     height: 25px;
+    background-color: white;
 }
 
 .header__search-clear-button {
