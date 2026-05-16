@@ -4,19 +4,10 @@
 </script>
 
 <template>
-    <div class = "linkholder text-black">
+    <div class = "text-black text-[200%] flex flex-col justify-self-center cursor-pointer">
         <slot></slot>
     </div>
 </template>
 
 <style>
-
-.linkholder {
-    font-size: 200%;
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    cursor: pointer;
-}
-
 </style>

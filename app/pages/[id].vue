@@ -22,122 +22,56 @@ useHead({
 
 <template>
     <h2>Товар</h2>
-    <div class = "product text-black">
-        <Carousel class="w-200">
+    <div class = "flex gap-[5%] bg-[var(--product-page-color)] text-black">
+        <Carousel class="w-125 ml-25">
             <CarouselContent>
-                <CarouselItem v-for="(img, index) in product?.images">
+                <CarouselItem v-for="(img) in product?.images">
                     <NuxtImg class = "size-128" :src=img></NuxtImg>
                 </CarouselItem>
             </CarouselContent>
             <CarouselPrevious />
             <CarouselNext />
         </Carousel>
-        <div class = "product__details">
+        <div class = "ml-[0%]">
             <h1 class = "product__name">{{ product?.name }}</h1>
-            <span class="product__rating"><Star :size="16"></Star>5.0</span>
-            <div class = "product__specifics">
-                <h2 class = "product__specifics-title">Характеристики</h2>
-                <div class = "product__specifics-container">
-                    <div v-for="att in product?.attributes" class = "product__spec product__spec--border">
-                        <span class = "product__spec-name">{{att.name}}</span>
-                        <span class = "product__spec-details">{{att.value}}</span>
+            <span class="text-left text-[var(--product-footer-font)]"><Star :size="16"></Star>5.0</span>
+            <div>
+                <h2>Характеристики</h2>
+                <div class = "w-[125%] h-[125%]">
+                    <div v-for="att in product?.attributes" class = "mb-[50px] border-t border-dashed">
+                        <span class="mr-[25%]">{{att.name}}</span>
+                        <span>{{att.value}}</span>
                     </div>
                 </div>
             </div>
-            <div class = "product__description">
-                <h2 class = "product__description-title">Описание</h2>
-                <p class = "product__description-paragraph">{{ product?.desc }}</p>
+            <div class = "w-[512px]">
+                <h2>Описание</h2>
+                <p>{{ product?.desc }}</p>
             </div>
         </div>
-        <div class = "product__order">
+        <div class = "bg-[var(--product-order-color)] w-[15%] flex flex-col items-center">
             <h2 class = "product__price">{{ product?.price }}$</h2>
-            <div class = "product__order-actions">
-                <button class = "product__order-button">Заказать</button>
+            <div class = "w-[50%] h-full">
+                <button class = "rounded-[20px] font-[600] border-none bg-[var(--body-color)] text-white cursor-pointer w-full h-[50px] hover:bg-[var(--product-order-button-hover-color)] transition-colors duration-200">Заказать</button>
             </div>
         </div>
     </div>
     <LinkHolder>
-        <NuxtLink class="testroute__link" to="testroute">To test route</NuxtLink>
+        <NuxtLink class="text-none text-inherit bg-[aliceblue]" to="testroute">To test route</NuxtLink>
     </LinkHolder>
 </template>
 
 <style lang="scss">
-.product {
-    background-color: rgb(255, 241, 214);
-    display: flex;
-    gap: 5%;
-    margin-left: 5%;
-}
-
-.product__details {
-    margin-left: 0%;
-}
 
 .product__name {
     @include product-card-title;
 }
 
-.product__rating {
-    text-align: left;
-    font-family: var(--product-footer-font);
-}
-
-.product__order {
-    background-color: wheat;
-    width: 15%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.product__order-button {
-    border-radius: 20px;
-    font-weight: 600;
-    border: none;
-    background-color: darkslategrey;
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    height: 50px;
-}
-
-.product__order-button:hover {
-    background-color: rgb(36, 59, 59);
-}
-
-.product__order-actions {
-    width: 50%;
-    height: 100%;
-}
 
 .product__price {
     @include product-card-price;
 }
 
-.product__specifics-container {
-    width: 125%;
-    height: 125%;
-}
-
-.product__spec {
-    margin-bottom: 50px;
-}
-
-.product__spec--border {
-    border-top: .5px dashed;
-}
-
-.product__spec-name {
-    margin-right: 100px;
-}
-
-.product__description {
-    width: 512px;
-}
-
-.product__description-paragraph {
-    line-break: anywhere;
-}
 
 
 </style>

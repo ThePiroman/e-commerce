@@ -14,13 +14,13 @@ import {
 </script>
 
 <template>
-    <footer class = "footer text-black">
-        <div class = "footer__container">
-            <div class = "footer__copyright">
-                <span class = "footer__copyright-text">Copyright <Copyright сдфыы :size=14></Copyright> 2026 Некоммерческая организация. Все права защищены. Все совпадения случайны.</span>
+    <footer class = "bg-[var(--footer-main-color)] absolute left-0 bottom-0 w-full -z-10 text-black">
+        <div class="flex justify-center items-center gap-[25%] pt-[5px] pb-[5px]">
+            <div>
+                <span>Copyright <Copyright :size=14></Copyright> 2026 Некоммерческая организация. Все права защищены. Все совпадения случайны.</span>
             </div>
             <Dialog>
-                <DialogTrigger>Контакты</DialogTrigger>
+                <DialogTrigger class="text-black hover:text-[var(--footer-button-hover-color)] transition-colors duration-200 cursor-pointer">Контакты</DialogTrigger>
                 <DialogContent>
                     <DialogHeader>
                     <DialogTitle>ThePiroman</DialogTitle>
@@ -37,55 +37,4 @@ import {
 
 
 <style>
-
-.footer {
-    background-color: var(--footer-main-color);
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: -1;
-}
-
-.footer__container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 25%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.footer__contacts {
-    cursor: pointer;
-}
-
-.footer__contacts:hover {
-    color: var(--footer-button-hover-color);
-}
-
-.modal__title {
-    font-family: "SN Pro", sans-serif;
-    font-size: 30px;
-}
-
-.modal__contact {
-    margin-top: 100px;
-}
-
-.modal__contact-name {
-    font-family: "Lato", sans-serif;
-    display: flex;
-    flex-direction: column;
-}
-
-.modal__contact-link {
-    text-decoration: underline;
-    color:black;
-}
-
-.modal__contact-link:hover {
-    color: var(--modal-button-hover-color);
-}
-
 </style>
