@@ -1,5 +1,5 @@
-@import url(reset.css);
-@import url(normalize.css);
+@import "tailwindcss";
+@import "@nuxt/ui";
 
 :root {
     --body-color: darkslategrey;
@@ -9,14 +9,22 @@
     --modal-close-button-hover-color: lightgrey;
     --modal-button-hover-color: rgb(60, 60, 60);
     --product-card-color: whitesmoke;
+    --header-main-color: rgb(61, 102, 102);
     --header-logo-color: white;
     --header-label-color: whitesmoke;
     --header-main-font: "Oswald", sans-serif;
     --product-price-font: "Oswald", sans-serif;
     --product-title-font: "SN Pro", sans-serif;
     --product-footer-font: "Lato", sans-serif;
+    --product-page-color: rgb(255, 241, 214);
+    --product-order-color: wheat;
+    --product-order-button-hover-color: rgb(36, 59, 59);
 }
 
 body {
     background-color: var(--body-color);
+}
+
+svg {
+    display: inline-block;
 }
