@@ -2,7 +2,9 @@ import { otpMap } from '#imports'
 
 export default defineEventHandler(async (event) => {
   const { phone, code } = await readBody(event)
-  const JSON_SERVER_URL = 'http://localhost:3001/users'
+  const runtimeConfig = useRuntimeConfig();
+
+  const JSON_SERVER_URL = runtimeConfig.public.fetchAddress + '/users'
 
   // 1. Проверяем код из нашего хранилища
   const savedOtp = otpMap.get(phone)
@@ -21,27 +23,18 @@ export default defineEventHandler(async (event) => {
     
     if (users && users.length > 0) {
       user = users[0] // Пользователь найден
-    } else {
-      // Пользователя нет — создаем нового
-      user = await $fetch(JSON_SERVER_URL, {
-        method: 'POST',
-        body: { 
-          phone, 
-          createdAt: new Date().toISOString() 
-        }
-      })
+
+      const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`
+
+      return { 
+        success: true, 
+        token: fakeToken,
+        user
+      }
     }
+
   } catch (error) {
     throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' })
   }
 
-  // 3. Генерируем фейковый токен для практики
-  // В реальном проекте тут был бы jwt.sign(...)
-  const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`
-
-  return { 
-    success: true, 
-    token: fakeToken,
-    user
-  }
 })

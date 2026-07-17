@@ -34,28 +34,46 @@
   ],
   "users": [
     {
-      "number": "228",
-      "id": "FXn2GJBefMQ"
+      "phone": "5555",
+      "name": "nason",
+      "createdAt": "2026-07-17T14:30:27.612Z",
+      "id": "ZoQYAV3MeqE"
     },
     {
-      "phone": "+7769159570",
-      "createdAt": "2026-06-29T12:43:47.825Z",
-      "id": "YNViIbSVr34"
+      "phone": "654",
+      "name": "saveliev",
+      "createdAt": "2026-07-17T14:31:17.107Z",
+      "id": "1SuyVGinkCI"
     },
     {
-      "phone": "+7769159570",
-      "createdAt": "2026-06-29T12:44:04.287Z",
-      "id": "8t5ioF6xVy4"
+      "phone": "543",
+      "name": "3245",
+      "createdAt": "2026-07-17T14:35:30.907Z",
+      "id": "ObIDhn5BWBk"
     },
     {
-      "phone": "228",
-      "createdAt": "2026-06-29T12:46:27.635Z",
-      "id": "xKWbtUr9m3w"
+      "phone": "45532",
+      "name": "atl",
+      "createdAt": "2026-07-17T14:37:15.242Z",
+      "id": "9SX6vjq2vlM"
     },
     {
-      "phone": "228",
-      "createdAt": "2026-06-29T13:01:03.639Z",
-      "id": "d1gL2OKFF4k"
+      "phone": "5435",
+      "name": "ass",
+      "createdAt": "2026-07-17T14:46:04.930Z",
+      "id": "oyBpzEPWdXE"
+    },
+    {
+      "phone": "2",
+      "name": "5243",
+      "createdAt": "2026-07-17T14:51:27.281Z",
+      "id": "-VvEU4rPkRU"
+    },
+    {
+      "phone": "4324",
+      "name": "sg",
+      "createdAt": "2026-07-17T14:58:23.256Z",
+      "id": "874NcANAjsU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
