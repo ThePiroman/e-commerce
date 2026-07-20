@@ -24,7 +24,7 @@ import {
                 <DialogContent>
                     <DialogHeader>
                     <DialogTitle>ThePiroman</DialogTitle>
-                    <DialogDescription>
+                    <DialogDescription class="flex flex-col items-center pt-5 gap-5">
                         <a class = "modal__contact-link" href="https://github.com/ThePiroman">Github</a>
                         <a class = "modal__contact-link" href="https://t.me/ThePiromanl">Telegram</a>
                     </DialogDescription>

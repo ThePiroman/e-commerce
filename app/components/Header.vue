@@ -28,7 +28,7 @@ const name = shallowRef('')
 
 const router = useRouter()
 
-const { isAuthenticated, user } = useAuth() // Достаем наш стейт
+const { isAuthenticated, user, userName } = useAuth()
 
 
 function handleSubmit() : void {
@@ -40,8 +40,7 @@ function handleSubmit() : void {
         
 }
 
-// Используем useCookie для SSR-совместимого хранения сессии
-const tokenCookie = useCookie('auth_token', { maxAge: 60 * 60 * 24 * 7 }) // 7 дней
+const tokenCookie = useCookie('auth_token', { maxAge: 60 * 60 * 24 * 7 })
 
 function goToProfile() {
   useRouter().push('profile')
@@ -56,8 +55,8 @@ const requestOtp = async () => {
       body: { phone: phone.value }
     })
     step.value = 2
-  } catch (err) {
-    errorMessage.value = err.data?.statusMessage || 'Ошибка отправки кода'
+  } catch (err : any) {
+    errorMessage.value = err.statusMessage || 'Ошибка отправки кода'
   } finally {
     loading.value = false
   }
@@ -76,10 +75,8 @@ const verifyOtp = async () => {
       method: "POST",
       body: { phone: phone.value }
     })
-
-    console.log(nameResponse)
     
-    if (nameResponse.success) {
+    if (nameResponse.success && response.success) {
 
       authorize(response)
 
@@ -89,9 +86,9 @@ const verifyOtp = async () => {
 
     }
     
-  } catch (err) {
+  } catch (err : any) {
     console.log(err)
-    errorMessage.value = err.data?.statusMessage || 'Неверный код'
+    errorMessage.value = err.statusMessage || 'Неверный код'
   } finally {
     loading.value = false
   }
@@ -101,18 +98,15 @@ const setName = async() => {
   errorMessage.value = ''
   try {
 
-    console.log(phone.value)
     const response = await $fetch('/api/auth/set_name', {
       method: 'POST',
       body: { phone: phone.value, name: name.value }
     })
 
-    console.log(response)
-
     authorize(response)
 
-  } catch (err) {
-    errorMessage.value = err.data?.statusMessage || 'Ошибка при подтверждении имени'
+  } catch (err : any) {
+    errorMessage.value = err.statusMessage || 'Ошибка при подтверждении имени'
   }
 }
 
@@ -120,6 +114,8 @@ function authorize(response) {
   tokenCookie.value = response.token
 
   user.value = response.user
+
+  userName.value = response.user.name
 
   step.value = 1
 
@@ -165,7 +161,7 @@ function authorize(response) {
 
                 </DialogTrigger>
 
-                <DialogContent  class="bg-[var(--header-main-color)]">
+                <DialogContent>
 
                     <DialogHeader>
 
@@ -208,7 +204,7 @@ function authorize(response) {
             <div v-else @click="goToProfile" class = "flex flex-col text-center items-center cursor-pointer">
 
                 <UserRound color="white" :size=32></UserRound>
-                <span class = "text-[var(--header-main-font)] text-[14px] text-[var(--header-label-color)]">Личка</span>
+                <span class = "text-[var(--header-main-font)] text-[14px] text-[var(--header-label-color)]">{{ userName }}</span>
 
             </div>
         </div>

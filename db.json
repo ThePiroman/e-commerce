@@ -33,48 +33,7 @@
     }
   ],
   "users": [
-    {
-      "phone": "5555",
-      "name": "nason",
-      "createdAt": "2026-07-17T14:30:27.612Z",
-      "id": "ZoQYAV3MeqE"
-    },
-    {
-      "phone": "654",
-      "name": "saveliev",
-      "createdAt": "2026-07-17T14:31:17.107Z",
-      "id": "1SuyVGinkCI"
-    },
-    {
-      "phone": "543",
-      "name": "3245",
-      "createdAt": "2026-07-17T14:35:30.907Z",
-      "id": "ObIDhn5BWBk"
-    },
-    {
-      "phone": "45532",
-      "name": "atl",
-      "createdAt": "2026-07-17T14:37:15.242Z",
-      "id": "9SX6vjq2vlM"
-    },
-    {
-      "phone": "5435",
-      "name": "ass",
-      "createdAt": "2026-07-17T14:46:04.930Z",
-      "id": "oyBpzEPWdXE"
-    },
-    {
-      "phone": "2",
-      "name": "5243",
-      "createdAt": "2026-07-17T14:51:27.281Z",
-      "id": "-VvEU4rPkRU"
-    },
-    {
-      "phone": "4324",
-      "name": "sg",
-      "createdAt": "2026-07-17T14:58:23.256Z",
-      "id": "874NcANAjsU"
-    }
+
   ],
   "$schema": "./node_modules/json-server/schema.json"
 }

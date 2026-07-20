@@ -2,11 +2,7 @@
 import Button from '~/components/ui/button/Button.vue';
 
 
-const { user, logout, fetchUser } = useAuth() // Достаем наш стейт
-
-console.log(user)
-
-await fetchUser()
+const { userName, logout }  = useAuth() // Достаем наш стейт
 
 useHead({
   title: 'Личный кабинет',
@@ -16,7 +12,7 @@ useHead({
 
 <template>
     <h1>Личный кабинет</h1>
-    <ClientOnly><span v-if="user">Привет, {{ user.name }}!</span></ClientOnly>
+    <ClientOnly><span v-if="userName">Привет, {{ userName }}!</span></ClientOnly>
     
     <Button @click="logout">Выйти</Button>
 </template>
