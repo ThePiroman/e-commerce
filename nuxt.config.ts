@@ -1,6 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import {resolve} from 'path';
-import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -18,9 +16,9 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "~/mixins.scss";`
+          additionalData: '@import "../mixins.scss";'
         }
       }
     }
   }
-})
+});

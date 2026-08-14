@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Heart, Star, MessageCircle } from 'lucide-vue-next'
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Heart, Star, MessageCircle } from 'lucide-vue-next';
 
 defineProps<{
   productId: string | number
-  image: string
+  image: string | undefined
   price: number
   name: string
-}>()
+}>();
 </script>
 
 <template>
-  <Card class="w-[256px] relative bg-[var(--product-card-color)] text-black">
+  <Card class="w-[256px] relative bg-product-card text-black">
     
     <!-- Favorite -->
     <div class="absolute right-3 top-3 z-10">
