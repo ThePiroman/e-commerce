@@ -1,10 +1,12 @@
 
 <script setup lang="ts">
-import { Search, ShoppingBasket, TextAlignJustify, UserRound, X } from 'lucide-vue-next';
+import { ShoppingBasket, TextAlignJustify, UserRound } from 'lucide-vue-next';
 
-import { Button } from "@/components/ui/button"
-import { Field } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Button } from '@/components/ui/button';
+import { Field } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
+
+import { FetchError } from 'ofetch';
 
 import {
   Dialog,
@@ -13,22 +15,24 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog';
 
 
 
 const headerSearchValue = shallowRef('');
-const step = shallowRef(1)
-const phone = shallowRef('')
-const otpCode = shallowRef('')
-const loading = shallowRef(false)
-const errorMessage = shallowRef('')
-const name = shallowRef('')
+const step = shallowRef(1);
+const phone = shallowRef('');
+const otpCode = shallowRef('');
+const loading = shallowRef(false);
+const errorMessage = shallowRef('');
+const name = shallowRef('');
+
+const otpShow = shallowRef('');
 
 
-const router = useRouter()
+const router = useRouter();
 
-const { isAuthenticated, user, userName } = useAuth()
+const { isAuthenticated, user, userName } = useAuth();
 
 
 function handleSubmit() : void {
@@ -40,95 +44,109 @@ function handleSubmit() : void {
         
 }
 
-const tokenCookie = useCookie('auth_token', { maxAge: 60 * 60 * 24 * 7 })
+const tokenCookie = useCookie('auth_token', { maxAge: 60 * 60 * 24 * 7 });
 
 function goToProfile() {
-  useRouter().push('profile')
+  useRouter().push('profile');
 }
 
 const requestOtp = async () => {
-  loading.value = true
-  errorMessage.value = ''
+  loading.value = true;
+  errorMessage.value = '';
   try {
-    await $fetch('/api/auth/send_otp', {
+    const response = await $fetch('/api/auth/send_otp', {
       method: 'POST',
       body: { phone: phone.value }
-    })
-    step.value = 2
-  } catch (err : any) {
-    errorMessage.value = err.statusMessage || 'Ошибка отправки кода'
+    });
+
+
+    otpShow.value = response.code;
+
+    step.value = 2;
+  } catch (err) {
+    if (err instanceof FetchError) {
+      errorMessage.value = err.statusMessage || 'Ошибка отправки кода';
+    }
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 
 const verifyOtp = async () => {
-  loading.value = true
-  errorMessage.value = ''
+  loading.value = true;
+  errorMessage.value = '';
   try {
     const response = await $fetch('/api/auth/verify_otp', {
-      method: "POST",
+      method: 'POST',
       body: { phone: phone.value, code: otpCode.value }
-    })
+    });
 
     const nameResponse = await $fetch('/api/auth/verify_name', {
-      method: "POST",
+      method: 'POST',
       body: { phone: phone.value }
-    })
+    });
     
     if (nameResponse.success && response.success) {
 
-      authorize(response)
+      authorize(response);
 
     } else {
 
-      step.value = 3
+      step.value = 3;
 
     }
     
-  } catch (err : any) {
-    console.log(err)
-    errorMessage.value = err.statusMessage || 'Неверный код'
+  } catch (err) {
+
+    if (err instanceof FetchError) {
+
+      errorMessage.value = String(err.statusMessage) || 'Неверный код';
+
+    }
+    
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 
 const setName = async() => {
-  errorMessage.value = ''
+  errorMessage.value = '';
   try {
 
     const response = await $fetch('/api/auth/set_name', {
       method: 'POST',
       body: { phone: phone.value, name: name.value }
-    })
+    });
 
-    authorize(response)
+    authorize(response);
 
-  } catch (err : any) {
-    errorMessage.value = err.statusMessage || 'Ошибка при подтверждении имени'
+  } catch (err) {
+    if (err instanceof FetchError) {
+
+      errorMessage.value = String(err.statusMessage) || 'Ошибка при подтверждении имени';
+    }
   }
-}
+};
 
-function authorize(response) {
-  tokenCookie.value = response.token
+function authorize(response : ResponseUser) {
+  tokenCookie.value = response.token;
 
-  user.value = response.user
+  user.value = response.user;
 
-  userName.value = response.user.name
+  userName.value = response.user.name;
 
-  step.value = 1
+  step.value = 1;
 
-  router.push('profile')
+  router.push('profile');
 }
 
 </script>
 
 <template>
-    <header class = "bg-[var(--header-main-color)]">
+    <header class = "bg-header">
         <div class = "flex justify-center items-center gap-[20px] pt-[10px]">
 
-            <NuxtLink to="/" class="mb-[10px] no-underline font-[var(--header-main-font)] text-[32px] text-[var(--header-logo-color)]">E-Commerce</NuxtLink>
+            <NuxtLink to="/" class="mb-[10px] no-underline font-header text-[32px] text-color-logo">E-Commerce</NuxtLink>
 
             <div>
                 <button class = "cursor-pointer bg-transparent"><TextAlignJustify color="white" :size=44></TextAlignJustify></button>
@@ -144,7 +162,7 @@ function authorize(response) {
             <div class = "flex flex-col text-center items-center cursor-pointer">
 
                 <ShoppingBasket color="white" :size=32></ShoppingBasket>
-                <span class = "text-[var(--header-main-font)] text-[14px] text-[var(--header-label-color)]">Корзина</span>
+                <span class = "font-header text-[14px] text-header-label">Корзина</span>
 
             </div>
 
@@ -152,10 +170,10 @@ function authorize(response) {
 
                 <DialogTrigger>
 
-                    <div class = "flex flex-col text-center items-center cursor-pointer">
+                    <div class = "flex flex-col font-center items-center cursor-pointer">
 
                         <UserRound color="white" :size=32></UserRound>
-                        <span class = "text-[var(--header-main-font)] text-[14px] text-[var(--header-label-color)]">Личный кабинет</span>
+                        <span class = "font-header text-[14px] text-header-label">Личный кабинет</span>
 
                     </div>
 
@@ -171,7 +189,7 @@ function authorize(response) {
 
                             <form class="flex flex-col items-center pt-5 gap-5" @submit.prevent="requestOtp" v-if="step === 1">
 
-                                <input class="bg-[var(--footer-main-color)] text-black" v-model="phone" type="tel" placeholder="+7 (999) 000-00-00" required/>
+                                <input class="bg-footer text-black" v-model="phone" type="tel" placeholder="+7 (999) 000-00-00" required/>
                                 <Button size="sm" type="submit" :disabled="loading">Получить код</Button>
 
                             </form>
@@ -179,7 +197,8 @@ function authorize(response) {
                             <form class="flex flex-col items-center pt-5 gap-5" @submit.prevent="verifyOtp" v-if="step === 2">
 
                                 <p>Код отправлен на {{ phone }}</p>
-                                <input class="bg-[var(--footer-main-color)] text-black" v-model="otpCode" type="text" placeholder="1234" required />
+                                <p>Код: {{ otpShow }}</p>
+                                <input class="bg-footer text-black" v-model="otpCode" type="text" placeholder="1234" required />
                                 
                                 <Button size="sm" type="submit" :disabled="loading">Потвердить</Button>
 
@@ -190,7 +209,7 @@ function authorize(response) {
 
                             <form class="flex flex-col items-center pt-5 gap-5" @submit.prevent="setName" v-if="step === 3">
 
-                              <input class="bg-[var(--footer-main-color)] text-black" v-model="name" type="text" placeholder="Имя" required/>
+                              <input class="bg-footer text-black" v-model="name" type="text" placeholder="Имя" required/>
                               <Button size="sm" type="submit" :disabled="loading">Потвердить</Button>
 
                             </form>
@@ -204,7 +223,7 @@ function authorize(response) {
             <div v-else @click="goToProfile" class = "flex flex-col text-center items-center cursor-pointer">
 
                 <UserRound color="white" :size=32></UserRound>
-                <span class = "text-[var(--header-main-font)] text-[14px] text-[var(--header-label-color)]">{{ userName }}</span>
+                <span class = "font-header text-[14px] text-header-label">{{ userName }}</span>
 
             </div>
         </div>

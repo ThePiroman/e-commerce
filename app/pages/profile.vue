@@ -2,19 +2,21 @@
 import Button from '~/components/ui/button/Button.vue';
 
 
-const { userName, logout }  = useAuth() // Достаем наш стейт
+const { userName, logout }  = useAuth();
 
 useHead({
   title: 'Личный кабинет',
-})
+});
 
 </script>
 
 <template>
+  <ClientOnly>
     <h1>Личный кабинет</h1>
-    <ClientOnly><span v-if="userName">Привет, {{ userName }}!</span></ClientOnly>
+    <span v-if="userName">Привет, {{ userName }}!</span>
     
     <Button @click="logout">Выйти</Button>
+  </ClientOnly>
 </template>
 
 <style>

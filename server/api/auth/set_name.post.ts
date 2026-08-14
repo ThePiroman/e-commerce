@@ -1,8 +1,8 @@
 export default defineEventHandler(async (event) => {
-  const { phone, name } = await readBody(event)
+  const { phone, name } = await readBody(event);
   const runtimeConfig = useRuntimeConfig();
 
-  const address = runtimeConfig.public.fetchAddress + '/users'
+  const address = runtimeConfig.public.fetchAddress + '/users';
 
   let user = null;
 
@@ -13,17 +13,17 @@ export default defineEventHandler(async (event) => {
         phone, 
         name,
         createdAt: new Date().toISOString()}
-    })
+    });
 
   } catch (error) {
-    throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' })
+    throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' });
   }
 
-  const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`
+  const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`;
 
-  return { 
+  return <ResponseUser>{ 
     success: true, 
     token: fakeToken,
     user
-  }
-})
+  };
+});

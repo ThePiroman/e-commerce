@@ -1,44 +1,44 @@
-import { otpMap } from '#imports'
+import { otpMap } from '#imports';
 
 export default defineEventHandler(async (event) => {
-  const { phone, code } = await readBody(event)
+  const { phone, code } = await readBody(event);
   const runtimeConfig = useRuntimeConfig();
 
   const address = runtimeConfig.public.fetchAddress + '/users';
 
-  const savedOtp = otpMap.get(phone)
+  const savedOtp = otpMap.get(phone);
 
 
   if (!savedOtp || savedOtp.trim() !== code.trim()) {
-    throw createError({ statusCode: 401, statusMessage: 'Неверный код' })
+    throw createError({ statusCode: 401, statusMessage: 'Неверный код' });
   }
 
-  otpMap.delete(phone)
+  otpMap.delete(phone);
 
   try {
 
-    let userList : Array<User> = await $fetch(`${address}`);
+    const userList : Array<User> = await $fetch(`${address}`);
 
-    let user : User | undefined = userList.find((user) => user.phone === phone)
+    const user : User | undefined = userList.find((user) => user.phone === phone);
     
     if (user) {
 
-      const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`
+      const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`;
 
-      return { 
+      return <ResponseUser>{ 
         success: true, 
         token: fakeToken,
         user
-      }
+      };
 
     } else {
 
-      return {success: false}
+      throw createError({ statusCode: 404, statusMessage: 'Пользователь не найден' });
 
     }
 
   } catch (error) {
-    throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' })
+    throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' });
   }
 
-})
+});

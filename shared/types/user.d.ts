@@ -1,5 +1,5 @@
 interface User {
-    phone: stirng;
+    phone?: string;
     name: string;
     timeCreated: string;
     id: string;

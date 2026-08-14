@@ -5,9 +5,6 @@
     --body-color: darkslategrey;
     --footer-main-color: gainsboro;
     --footer-button-hover-color: rgb(125, 125, 125);
-    --modal-main-color: grey;
-    --modal-close-button-hover-color: lightgrey;
-    --modal-button-hover-color: rgb(60, 60, 60);
     --product-card-color: whitesmoke;
     --header-main-color: rgb(61, 102, 102);
     --header-logo-color: white;
@@ -19,6 +16,54 @@
     --product-page-color: rgb(255, 241, 214);
     --product-order-color: wheat;
     --product-order-button-hover-color: rgb(36, 59, 59);
+}
+
+@layer utilities {
+    .bg-body {
+        background-color: var(--body-color);
+    }
+
+    .bg-footer {
+        background-color: var(--footer-main-color);
+    }
+
+    .text-footer-button-hover:hover {
+        color: var(--footer-button-hover-color);
+    }
+
+    .bg-product-card {
+        background-color: var(--product-card-color);
+    }
+
+    .bg-header {
+        background-color: var(--header-main-color);
+    }
+
+    .text-header-logo {
+        color: var(--header-logo-color);
+    }
+
+    .font-header {
+        font-family: var(--header-main-font);
+    }
+
+    .bg-product-page {
+        background-color: var(--product-page-color);
+    }
+    
+    .bg-product-order {
+        background-color: var(--product-order-color);
+    }
+
+    .bg-product-order-button-hover:hover {
+        background-color: var(--product-order-button-hover-color);
+    }
+
+    .text-header-label {
+        color: var(--header-label-color);
+    }
+    
+    
 }
 
 body {

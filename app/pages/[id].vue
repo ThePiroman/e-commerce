@@ -7,7 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from '@/components/ui/carousel';
 
 const route = useRoute();
 
@@ -16,16 +16,16 @@ const product = fetchResult.product;
 
 useHead({
   title: `${product.value?.name ?? ''} купить быстро недорого`
-})
+});
 
 </script>
 
 <template>
     <h2>Товар</h2>
-    <div class = "flex gap-[5%] bg-[var(--product-page-color)] text-black">
+    <div class = "flex gap-[5%] bg-product-page text-black">
         <Carousel class="w-125 ml-25">
             <CarouselContent>
-                <CarouselItem v-for="(img) in product?.images">
+                <CarouselItem v-for="(img, index) in product?.images" :key="index">
                     <NuxtImg class = "size-128" :src=img></NuxtImg>
                 </CarouselItem>
             </CarouselContent>
@@ -34,11 +34,11 @@ useHead({
         </Carousel>
         <div class = "ml-[0%]">
             <h1 class = "product__name">{{ product?.name }}</h1>
-            <span class="text-left text-[var(--product-footer-font)]"><Star :size="16"></Star>5.0</span>
+            <span class="text-left font-product-footer"><Star :size="16"></Star>5.0</span>
             <div>
                 <h2>Характеристики</h2>
                 <div class = "w-[125%] h-[125%]">
-                    <div v-for="att in product?.attributes" class = "mb-[50px] border-t border-dashed">
+                    <div v-for="(att, index) in product?.attributes" :key="index" class = "mb-[50px] border-t border-dashed">
                         <span class="mr-[25%]">{{att.name}}</span>
                         <span>{{att.value}}</span>
                     </div>
@@ -49,10 +49,10 @@ useHead({
                 <p>{{ product?.desc }}</p>
             </div>
         </div>
-        <div class = "bg-[var(--product-order-color)] w-[15%] flex flex-col items-center">
+        <div class = "bg-product-order w-[15%] flex flex-col items-center">
             <h2 class = "product__price">{{ product?.price }}$</h2>
             <div class = "w-[50%] h-full">
-                <button class = "rounded-[20px] font-[600] border-none bg-[var(--body-color)] text-white cursor-pointer w-full h-[50px] hover:bg-[var(--product-order-button-hover-color)] transition-colors duration-200">Заказать</button>
+                <button class = "rounded-[20px] font-[600] border-none bg-body text-white cursor-pointer w-full h-[50px] bg-product-order-button-hover transition-colors duration-200">Заказать</button>
             </div>
         </div>
     </div>
