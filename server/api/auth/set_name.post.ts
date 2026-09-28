@@ -1,3 +1,4 @@
+import { FetchError } from 'ofetch';
 export default defineEventHandler(async (event) => {
   const { phone, name } = await readBody(event);
   const runtimeConfig = useRuntimeConfig();
@@ -7,16 +8,25 @@ export default defineEventHandler(async (event) => {
   let user = null;
 
   try {
-    user = await $fetch(address, {
-      method: 'POST',
-      body: { 
-        phone, 
-        name,
-        createdAt: new Date().toISOString()}
-    });
+
+    if (import.meta.dev) {
+      user = await $fetch(address, {
+        method: 'POST',
+        body: { 
+          phone, 
+          name,
+          createdAt: new Date().toISOString()}
+      });
+    } else {
+      user = {phone, name, createdAt: new Date().toISOString()};
+    }
 
   } catch (error) {
-    throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' });
+    if (error instanceof FetchError) {
+
+      throw createError({statusCode: error.statusCode, statusMessage: error.statusMessage});  
+
+    }
   }
 
   const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`;

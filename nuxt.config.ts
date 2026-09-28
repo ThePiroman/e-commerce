@@ -20,5 +20,8 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+  app: {
+    baseURL: '/e-commerce/'
   }
 });

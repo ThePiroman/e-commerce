@@ -1,4 +1,5 @@
 import { otpMap } from '#imports';
+import { FetchError } from 'ofetch';
 
 export default defineEventHandler(async (event) => {
   const { phone, code } = await readBody(event);
@@ -8,12 +9,9 @@ export default defineEventHandler(async (event) => {
 
   const savedOtp = otpMap.get(phone);
 
-
   if (!savedOtp || savedOtp.trim() !== code.trim()) {
     throw createError({ statusCode: 401, statusMessage: 'Неверный код' });
   }
-
-  otpMap.delete(phone);
 
   try {
 
@@ -25,20 +23,29 @@ export default defineEventHandler(async (event) => {
 
       const fakeToken = `test_token_${Buffer.from(phone).toString('base64')}_${Date.now()}`;
 
+      otpMap.delete(phone);
+
       return <ResponseUser>{ 
         success: true, 
         token: fakeToken,
         user
       };
 
+
     } else {
 
-      throw createError({ statusCode: 404, statusMessage: 'Пользователь не найден' });
+      return {success: false};
 
     }
 
   } catch (error) {
-    throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' });
+
+    if (error instanceof FetchError) {
+
+      throw createError({statusCode: error.statusCode, statusMessage: error.statusMessage});  
+
+    }
+
   }
 
 });

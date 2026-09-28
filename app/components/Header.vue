@@ -85,6 +85,7 @@ const verifyOtp = async () => {
       method: 'POST',
       body: { phone: phone.value }
     });
+
     
     if (nameResponse.success && response.success) {
 
@@ -92,9 +93,10 @@ const verifyOtp = async () => {
 
     } else {
 
-      step.value = 3;
-
+      step.value = 3; 
+      
     }
+
     
   } catch (err) {
 

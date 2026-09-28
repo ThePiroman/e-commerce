@@ -1,3 +1,6 @@
+import { FetchError } from 'ofetch';
+
+
 export default defineEventHandler(async (event) => {
   const { phone } = await readBody(event);
   const runtimeConfig = useRuntimeConfig();
@@ -15,13 +18,18 @@ export default defineEventHandler(async (event) => {
       
     } else {
 
-      throw createError({ statusCode: 404, statusMessage: 'Пользователь не найден' });
+      return {success: false};
+
     }
 
 
   } catch (error) {
 
-    throw createError({ statusCode: 500, statusMessage: 'Ошибка связи с базой данных' });
+    if (error instanceof FetchError) {
+
+      throw createError({statusCode: error.statusCode, statusMessage: error.statusMessage});  
+
+    }
 
   }
 
