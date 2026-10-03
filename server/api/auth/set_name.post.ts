@@ -8,19 +8,15 @@ export default defineEventHandler(async (event) => {
   let user = null;
 
   try {
-
-    if (import.meta.dev) {
-      user = await $fetch(address, {
-        method: 'POST',
-        body: { 
-          phone, 
-          name,
-          createdAt: new Date().toISOString()}
-      });
-    } else {
-      user = {phone, name, createdAt: new Date().toISOString()};
-    }
-
+    
+    user = await $fetch(address, {
+      method: 'POST',
+      body: { 
+        phone, 
+        name,
+        createdAt: new Date().toISOString()}
+    });
+ 
   } catch (error) {
     if (error instanceof FetchError) {
 
