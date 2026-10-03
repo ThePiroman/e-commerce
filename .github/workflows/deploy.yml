@@ -17,6 +17,8 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NUXT_FETCH_ADDRESS: ${{ secrets.NUXT_FETCH_ADDRESS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
