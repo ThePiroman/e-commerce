@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      fetchAddress: import.meta.env.NUXT_FETCH_ADDRESS
+      fetchAddress: process.env.NUXT_FETCH_ADDRESS
     }
   },
   vite: {
